@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# SLURM / logs
+*.out
+*.err
+logs/
+output_files/
+
+# Figures / artifacts
+*.png
+*.pdf
+*.svg
+
+# Experiment outputs / caches / large artifacts
+experiments/
+experiments_smoke/
+wandb/
+*.pt
+*.bin
+*.safetensors
+.pytest_cache/
