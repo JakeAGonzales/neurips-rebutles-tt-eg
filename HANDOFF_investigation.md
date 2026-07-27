@@ -85,3 +85,34 @@ KL/loss/accuracy trajectories overlap, the correction is confirmed negligible.
 - `EGPO/lms/loss` / `risk_egpo/loss.py` — IPO/DPO loss and risk functionals.
 - `plot_training_metrics.py` / `plot_oipo1_compare.py` — training-dynamics plotting
   (EMA α=0.1 smoothing; `--xclip` to match the paper's 4680-step cutoff).
+
+## OMD + TT port (new)
+
+TT was originally EG-only. It now also runs on single-step algs (OMD = `--alg oipo1`,
+also `nmd`). Both the old `train.py` and `tt_eg.py` use the **same** trainer class
+(`RiskExtragradientTrainer` / its subclass `TTEGTrainer`) for every alg — `--alg` only
+toggles `estimate_extra_grad` (True for `eg`) and the run name. So the paper's OMD is
+just this trainer with `estimate_extra_grad=False`, which is exactly what the port
+reduces to. Changes (all gated so EG runs stay bit-identical):
+
+- `tt_eg.py:162` — `estimate_extra_grad` now required only for
+  `tteg_bias_point=extrapolated` (the EG look-ahead). `base` works for any alg.
+- `tt_eg.py:534` — cadence is conditional: EG fires the tracker once per
+  extrapolate/update pair (`global_step % 2`, indexed by `//2`); single-step algs fire
+  it **every step** (`update_idx = global_step`).
+- `tt_eg.py:704` — non-`eg` algs allowed only with `--tteg_bias_point base`.
+
+Run it: `batch_jobs/tteg_omd_c10.slurm` (oipo1, entropic c=10, γ=0.1, base). Validate
+first with `batch_jobs/smoke_tteg_omd.slurm` (Gate A neutral + xi advancement at c=10).
+Note: `extrapolated` has no meaning for OMD (no look-ahead iterate), so only `base` is
+available there.
+
+## Environment
+
+`requirements.txt` pins the exact reproducible stack from the `nlhf` conda env
+(Python 3.10, CUDA 12.1): `torch==2.2.1` (cu121), `transformers==4.48.0`,
+`trl==0.13.0`, `deepspeed==0.16.2`, `peft==0.14.0`, `accelerate==1.2.1`,
+`datasets==3.2.0`, plus HF runtime pins and `matplotlib` (plotting only). Install torch
+from the cu121 index first, then `pip install -r requirements.txt` (deepspeed builds
+against the installed torch/CUDA). This is the `nlhf` stack; the May-2025 baselines were
+trained in the older `myenv` — version skew there is investigation suspect **C** above.
