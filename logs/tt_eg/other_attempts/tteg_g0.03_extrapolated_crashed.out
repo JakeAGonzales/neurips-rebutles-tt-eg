@@ -1,0 +1,40 @@
+[tteg_ab_xt] gamma=0.03 bias_point=extrapolated c=10 K=8
+[2026-07-25 12:23:39,465] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-07-25 12:23:43,273] [WARNING] [runner.py:215:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected VISIBLE_DEVICES=0 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2026-07-25 12:23:43,274] [INFO] [runner.py:607:main] cmd = /mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMF19 --master_addr=127.0.0.1 --master_port=24087 --enable_each_rank_log=None risk_egpo/tt_eg.py --alg eg --lora --ypp_samples 8 --risk entropic --risk_c 10.0 --use_tteg --tteg_gamma 0.03 --tteg_bias_point extrapolated
+[2026-07-25 12:23:44,950] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-07-25 12:23:46,372] [INFO] [launch.py:146:main] WORLD INFO DICT: {'localhost': [0]}
+[2026-07-25 12:23:46,372] [INFO] [launch.py:152:main] nnodes=1, num_local_procs=1, node_rank=0
+[2026-07-25 12:23:46,372] [INFO] [launch.py:163:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0]})
+[2026-07-25 12:23:46,373] [INFO] [launch.py:164:main] dist_world_size=1
+[2026-07-25 12:23:46,373] [INFO] [launch.py:168:main] Setting CUDA_VISIBLE_DEVICES=0
+[2026-07-25 12:23:46,373] [INFO] [launch.py:256:main] process 40894 spawned with command: ['/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/bin/python', '-u', 'risk_egpo/tt_eg.py', '--local_rank=0', '--alg', 'eg', '--lora', '--ypp_samples', '8', '--risk', 'entropic', '--risk_c', '10.0', '--use_tteg', '--tteg_gamma', '0.03', '--tteg_bias_point', 'extrapolated']
+[2026-07-25 12:23:48,057] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-07-25 12:23:50,843] [INFO] [comm.py:652:init_distributed] cdb=None
+[2026-07-25 12:23:50,843] [INFO] [comm.py:683:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[W socket.cpp:464] [c10d] The server socket has failed to bind to [::]:24087 (errno: 98 - Address already in use).
+[W socket.cpp:464] [c10d] The server socket has failed to bind to 0.0.0.0:24087 (errno: 98 - Address already in use).
+[E socket.cpp:500] [c10d] The server socket has failed to listen on any local network address.
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/mlopt/jakegonz/llm_tune/risk_egpo/tt_eg.py", line 777, in <module>
+    main()
+  File "/mmfs1/gscratch/mlopt/jakegonz/llm_tune/risk_egpo/tt_eg.py", line 618, in main
+    deepspeed.init_distributed()
+  File "/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/lib/python3.10/site-packages/deepspeed/comm/comm.py", line 685, in init_distributed
+    cdb = TorchBackend(dist_backend, timeout, init_method, rank, world_size)
+  File "/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/lib/python3.10/site-packages/deepspeed/comm/torch.py", line 112, in __init__
+    self.init_process_group(backend, timeout, init_method, rank, world_size)
+  File "/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/lib/python3.10/site-packages/deepspeed/comm/torch.py", line 142, in init_process_group
+    torch.distributed.init_process_group(backend,
+  File "/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 86, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 1177, in init_process_group
+    store, rank, world_size = next(rendezvous_iterator)
+  File "/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/lib/python3.10/site-packages/torch/distributed/rendezvous.py", line 246, in _env_rendezvous_handler
+    store = _create_c10d_store(master_addr, master_port, rank, world_size, timeout, use_libuv)
+  File "/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/lib/python3.10/site-packages/torch/distributed/rendezvous.py", line 174, in _create_c10d_store
+    return TCPStore(
+torch.distributed.DistNetworkError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:24087 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:24087 (errno: 98 - Address already in use).
+[2026-07-25 12:23:52,379] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 40894
+[2026-07-25 12:23:52,379] [ERROR] [launch.py:325:sigkill_handler] ['/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/bin/python', '-u', 'risk_egpo/tt_eg.py', '--local_rank=0', '--alg', 'eg', '--lora', '--ypp_samples', '8', '--risk', 'entropic', '--risk_c', '10.0', '--use_tteg', '--tteg_gamma', '0.03', '--tteg_bias_point', 'extrapolated'] exits with return code = 1

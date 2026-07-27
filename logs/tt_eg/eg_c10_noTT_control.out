@@ -1,0 +1,437 @@
+[tteg_k8_c10_noTT] EG (no TT) c=10 K=8  (xi=0 every step)
+[2026-07-27 08:06:14,379] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-07-27 08:08:03,721] [WARNING] [runner.py:215:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected VISIBLE_DEVICES=0 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2026-07-27 08:08:03,722] [INFO] [runner.py:607:main] cmd = /mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMF19 --master_addr=127.0.0.1 --master_port=30277 --enable_each_rank_log=None risk_egpo/tt_eg.py --alg eg --lora --ypp_samples 8 --risk entropic --risk_c 10.0
+[2026-07-27 08:08:05,408] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-07-27 08:08:07,306] [INFO] [launch.py:146:main] WORLD INFO DICT: {'localhost': [0]}
+[2026-07-27 08:08:07,306] [INFO] [launch.py:152:main] nnodes=1, num_local_procs=1, node_rank=0
+[2026-07-27 08:08:07,306] [INFO] [launch.py:163:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0]})
+[2026-07-27 08:08:07,306] [INFO] [launch.py:164:main] dist_world_size=1
+[2026-07-27 08:08:07,306] [INFO] [launch.py:168:main] Setting CUDA_VISIBLE_DEVICES=0
+[2026-07-27 08:08:07,307] [INFO] [launch.py:256:main] process 92741 spawned with command: ['/mmfs1/gscratch/mlopt/jakegonz/conda_envs/nlhf/bin/python', '-u', 'risk_egpo/tt_eg.py', '--local_rank=0', '--alg', 'eg', '--lora', '--ypp_samples', '8', '--risk', 'entropic', '--risk_c', '10.0']
+[2026-07-27 08:08:09,001] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2026-07-27 08:09:05,052] [INFO] [comm.py:652:init_distributed] cdb=None
+[2026-07-27 08:09:05,052] [INFO] [comm.py:683:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:25<00:25, 25.03s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 11.51s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.54s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  4.66it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:26<00:00, 15.59s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:26<00:00, 13.29s/it]
+72773 examples after filtering.
+Group histogram (total=30000):
+  safe             n= 11986  p_hat=0.3995
+  unsafe-low       n=  1840  p_hat=0.0613
+  unsafe-med       n= 12705  p_hat=0.4235
+  unsafe-high      n=  3469  p_hat=0.1156
+Resuming from None
+TT-EG=False gamma=0.1 risk=entropic K=8
+Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[2026-07-27 08:12:08,476] [INFO] [logging.py:128:log_dist] [Rank 0] DeepSpeed info: version=0.16.2, git-hash=unknown, git-branch=unknown
+[2026-07-27 08:12:08,476] [INFO] [config.py:733:__init__] Config mesh_device None world_size = 1
+[2026-07-27 08:12:09,163] [INFO] [logging.py:128:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2026-07-27 08:12:09,165] [INFO] [logging.py:128:log_dist] [Rank 0] Creating BF16 optimizer
+[2026-07-27 08:12:09,320] [INFO] [utils.py:781:see_memory_usage] begin bf16_optimizer
+[2026-07-27 08:12:09,320] [INFO] [utils.py:782:see_memory_usage] MA 9.86 GB         Max_MA 9.86 GB         CA 10.16 GB         Max_CA 10 GB 
+[2026-07-27 08:12:09,320] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 86.6 GB, percent = 5.7%
+[2026-07-27 08:12:09,447] [INFO] [utils.py:781:see_memory_usage] end bf16_ optimizer
+[2026-07-27 08:12:09,447] [INFO] [utils.py:782:see_memory_usage] MA 9.86 GB         Max_MA 9.86 GB         CA 10.16 GB         Max_CA 10 GB 
+[2026-07-27 08:12:09,448] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 86.6 GB, percent = 5.7%
+[2026-07-27 08:12:09,450] [INFO] [config.py:999:print] DeepSpeedEngine configuration:
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True, 'use_gds': False}
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   amp_enabled .................. False
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   amp_params ................... False
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": "autotuning_results", 
+    "exps_dir": "autotuning_exps", 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   bfloat16_enabled ............. True
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   bfloat16_immediate_grad_update  False
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   checkpoint_parallel_write_pipeline  False
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   checkpoint_tag_validation_enabled  True
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   checkpoint_tag_validation_fail  False
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x14a92c772680>
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   communication_data_type ...... None
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   curriculum_enabled_legacy .... False
+[2026-07-27 08:12:09,450] [INFO] [config.py:1003:print]   curriculum_params_legacy ..... False
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'curriculum_learning': {'enabled': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   data_efficiency_enabled ...... False
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   dataloader_drop_last ......... False
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   disable_allgather ............ False
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   dump_state ................... False
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   dynamic_loss_scale_args ...... None
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   eigenvalue_enabled ........... False
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   eigenvalue_gas_boundary_resolution  1
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   eigenvalue_layer_num ......... 0
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   eigenvalue_max_iter .......... 100
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   eigenvalue_stability ......... 1e-06
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   eigenvalue_tol ............... 0.01
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   eigenvalue_verbose ........... False
+[2026-07-27 08:12:09,451] [INFO] [config.py:1003:print]   elasticity_enabled ........... False
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "recompute_fwd_factor": 0.0, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   fp16_auto_cast ............... None
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   fp16_enabled ................. False
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   fp16_master_weights_and_gradients  False
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   global_rank .................. 0
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   grad_accum_dtype ............. None
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   gradient_accumulation_steps .. 1
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   gradient_clipping ............ 0.0
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   gradient_predivide_factor .... 1.0
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   graph_harvesting ............. False
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   initial_dynamic_scale ........ 1
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   load_universal_checkpoint .... False
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   loss_scale ................... 1.0
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   memory_breakdown ............. False
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   mics_hierarchial_params_gather  False
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   mics_shard_size .............. -1
+[2026-07-27 08:12:09,452] [INFO] [config.py:1003:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') comet=CometConfig(enabled=False, samples_log_interval=100, project=None, workspace=None, api_key=None, experiment_name=None, experiment_key=None, online=None, mode=None) wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName')
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   optimizer_legacy_fusion ...... False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   optimizer_name ............... None
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   optimizer_params ............. None
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0, 'pipe_partitioned': True, 'grad_partitioned': True}
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   pld_enabled .................. False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   pld_params ................... False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   prescale_gradients ........... False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   scheduler_name ............... None
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   scheduler_params ............. None
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   seq_parallel_communication_data_type  torch.float32
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   sparse_attention ............. None
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   sparse_gradients_enabled ..... False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   steps_per_print .............. None
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   timers_config ................ enabled=True synchronized=True
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   train_batch_size ............. 8
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   train_micro_batch_size_per_gpu  8
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   use_data_before_expert_parallel_  False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   use_node_local_storage ....... False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   wall_clock_breakdown ......... False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   weight_quantization_config ... None
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   world_size ................... 1
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   zero_allow_untested_optimizer  False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   zero_config .................. stage=0 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=500000000 use_multi_rank_bucket_allreduce=True allgather_partitions=True allgather_bucket_size=500000000 overlap_comm=False load_from_fp32_weights=True elastic_checkpoint=False offload_param=None offload_optimizer=None sub_group_size=1000000000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50000000 param_persistence_threshold=100000 model_persistence_threshold=9223372036854775807 max_live_parameters=1000000000 max_reuse_distance=1000000000 gather_16bit_weights_on_model_save=False module_granularity_threshold=0 use_all_reduce_for_fetch_params=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_nontrainable_weights=False zero_quantized_gradients=False zeropp_loco_param=None mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True pipeline_loading_checkpoint=False override_module_apply=True
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   zero_enabled ................. False
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   zero_force_ds_cpu_optimizer .. True
+[2026-07-27 08:12:09,453] [INFO] [config.py:1003:print]   zero_optimization_stage ...... 0
+[2026-07-27 08:12:09,453] [INFO] [config.py:989:print_user_config]   json = {
+    "train_micro_batch_size_per_gpu": 8, 
+    "prescale_gradients": false, 
+    "wall_clock_breakdown": false, 
+    "bf16": {
+        "enabled": true
+    }
+}
+  0%|          | 0/9360 [00:00<?, ?it/s]Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+The 'batch_size' argument of HybridCache is deprecated and will be removed in v4.49. Use the more precisely named 'max_batch_size' argument instead.
+The 'batch_size' attribute of HybridCache is deprecated and will be removed in v4.49. Use the more precisely named 'self.max_batch_size' attribute instead.
+  0%|          | 1/9360 [00:39<103:34:57, 39.84s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 2/9360 [01:18<102:20:31, 39.37s/it]  0%|          | 3/9360 [01:57<100:56:40, 38.84s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 4/9360 [02:35<100:20:02, 38.61s/it]  0%|          | 5/9360 [03:14<100:40:06, 38.74s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 6/9360 [03:53<100:57:08, 38.85s/it]  0%|          | 7/9360 [04:33<101:45:30, 39.17s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 8/9360 [05:11<101:07:57, 38.93s/it]  0%|          | 9/9360 [05:49<100:28:27, 38.68s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 10/9360 [06:28<100:26:44, 38.67s/it]                                                     {'loss': 9.6575, 'grad_norm': 33.4791259765625, 'learning_rate': 5e-09, 'kl': 0.0047607421875, 'prefs/chosen': 0.3290078815072775, 'prefs/rejected': 0.12437786292284728, 'prefs/margins': 0.2046300172805786, 'rewards/chosen': -1.5243887901306152e-05, 'rewards/rejected': 2.5665760040283204e-05, 'rewards/margins': -4.110634326934814e-05, 'rewards/accuracies': 0.2046875, 'logps/chosen': -2.292578125, 'logps/rejected': -2.1080078125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.02, 'avg_loss': 1.2071875}
+  0%|          | 10/9360 [06:28<100:26:44, 38.67s/it]  0%|          | 11/9360 [07:07<100:58:27, 38.88s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 12/9360 [07:46<100:37:23, 38.75s/it]  0%|          | 13/9360 [08:25<101:03:38, 38.92s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 14/9360 [09:04<101:25:08, 39.07s/it]  0%|          | 15/9360 [09:43<100:38:34, 38.77s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 16/9360 [10:21<100:45:26, 38.82s/it]  0%|          | 17/9360 [11:00<100:34:04, 38.75s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 18/9360 [11:38<99:33:42, 38.37s/it]   0%|          | 19/9360 [12:16<99:42:33, 38.43s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 20/9360 [12:55<99:46:47, 38.46s/it]                                                    {'loss': 10.3038, 'grad_norm': 27.506248474121094, 'learning_rate': 1e-08, 'kl': 0.00665283203125, 'prefs/chosen': 0.34037426989525554, 'prefs/rejected': 0.12221553418785333, 'prefs/margins': 0.21815873626619578, 'rewards/chosen': -8.016824722290039e-06, 'rewards/rejected': -4.398226737976074e-05, 'rewards/margins': 3.6162137985229495e-05, 'rewards/accuracies': 0.3921875, 'logps/chosen': -2.1984375, 'logps/rejected': -2.1693359375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.04, 'avg_loss': 1.287975}
+  0%|          | 20/9360 [12:55<99:46:47, 38.46s/it]  0%|          | 21/9360 [13:33<99:52:34, 38.50s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 22/9360 [14:11<99:14:21, 38.26s/it]  0%|          | 23/9360 [14:50<100:10:36, 38.62s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 24/9360 [15:28<99:28:14, 38.36s/it]   0%|          | 25/9360 [16:06<98:54:31, 38.14s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 26/9360 [16:44<99:10:46, 38.25s/it]  0%|          | 27/9360 [17:23<99:49:59, 38.51s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 28/9360 [18:02<99:59:50, 38.58s/it]  0%|          | 29/9360 [18:41<100:06:21, 38.62s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 30/9360 [19:20<100:11:28, 38.66s/it]                                                     {'loss': 8.2537, 'grad_norm': 18.758502960205078, 'learning_rate': 1.5e-08, 'kl': 0.006414794921875, 'prefs/chosen': 0.30370184425264596, 'prefs/rejected': 0.11833669720217585, 'prefs/margins': 0.18536514779552818, 'rewards/chosen': -6.59942626953125e-05, 'rewards/rejected': 8.64565372467041e-06, 'rewards/margins': -7.47770071029663e-05, 'rewards/accuracies': 0.359375, 'logps/chosen': -2.06279296875, 'logps/rejected': -2.19609375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.06, 'avg_loss': 1.0317125}
+  0%|          | 30/9360 [19:20<100:11:28, 38.66s/it]  0%|          | 31/9360 [19:58<100:04:35, 38.62s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 32/9360 [20:37<100:08:30, 38.65s/it]  0%|          | 33/9360 [21:15<99:48:15, 38.52s/it] _load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 34/9360 [21:53<99:24:13, 38.37s/it]  0%|          | 35/9360 [22:32<99:52:44, 38.56s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 36/9360 [23:11<100:02:52, 38.63s/it]  0%|          | 37/9360 [23:49<100:00:28, 38.62s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 38/9360 [24:27<99:12:40, 38.31s/it]   0%|          | 39/9360 [25:05<99:16:34, 38.34s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 40/9360 [25:45<100:01:49, 38.64s/it]                                                     {'loss': 9.6015, 'grad_norm': 23.28753662109375, 'learning_rate': 2e-08, 'kl': 0.006243896484375, 'prefs/chosen': 0.3120622707530856, 'prefs/rejected': 0.11196724083274603, 'prefs/margins': 0.20009503113105892, 'rewards/chosen': -3.6075711250305176e-05, 'rewards/rejected': 7.909536361694335e-06, 'rewards/margins': -4.424452781677246e-05, 'rewards/accuracies': 0.3234375, 'logps/chosen': -2.10205078125, 'logps/rejected': -2.14033203125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.09, 'avg_loss': 1.2001875}
+  0%|          | 40/9360 [25:45<100:01:49, 38.64s/it]  0%|          | 41/9360 [26:24<100:16:19, 38.74s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 42/9360 [27:03<100:23:03, 38.78s/it]  0%|          | 43/9360 [27:42<100:39:11, 38.89s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 44/9360 [28:21<100:50:02, 38.97s/it]  0%|          | 45/9360 [29:00<101:03:51, 39.06s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  0%|          | 46/9360 [29:39<100:54:35, 39.00s/it]  1%|          | 47/9360 [30:19<101:16:03, 39.15s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 48/9360 [30:58<101:09:25, 39.11s/it]  1%|          | 49/9360 [31:36<100:36:05, 38.90s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 50/9360 [32:15<100:37:06, 38.91s/it]                                                     {'loss': 7.6484, 'grad_norm': 13.429741859436035, 'learning_rate': 2.5e-08, 'kl': 0.00643310546875, 'prefs/chosen': 0.3047485397197306, 'prefs/rejected': 0.12251536552794277, 'prefs/margins': 0.18223317535594105, 'rewards/chosen': 9.220838546752929e-06, 'rewards/rejected': -7.569193840026856e-05, 'rewards/margins': 8.478164672851563e-05, 'rewards/accuracies': 0.3875, 'logps/chosen': -2.161328125, 'logps/rejected': -2.111328125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.11, 'avg_loss': 0.95605}
+  1%|          | 50/9360 [32:15<100:37:06, 38.91s/it]  1%|          | 51/9360 [32:54<100:46:57, 38.97s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 52/9360 [33:33<100:59:02, 39.06s/it]  1%|          | 53/9360 [34:11<100:16:25, 38.79s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 54/9360 [34:51<100:39:58, 38.94s/it]  1%|          | 55/9360 [35:30<100:34:11, 38.91s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 56/9360 [36:08<99:51:19, 38.64s/it]   1%|          | 57/9360 [36:46<99:26:42, 38.48s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 58/9360 [37:24<99:24:21, 38.47s/it]  1%|          | 59/9360 [38:02<99:14:16, 38.41s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 60/9360 [38:41<99:00:03, 38.32s/it]                                                    {'loss': 7.92, 'grad_norm': 16.144514083862305, 'learning_rate': 3e-08, 'kl': 0.0060546875, 'prefs/chosen': 0.3045921014621854, 'prefs/rejected': 0.11890247599221766, 'prefs/margins': 0.18568962411954998, 'rewards/chosen': -9.709298610687256e-05, 'rewards/rejected': -6.169974803924561e-05, 'rewards/margins': -3.540515899658203e-05, 'rewards/accuracies': 0.34375, 'logps/chosen': -2.02314453125, 'logps/rejected': -2.05361328125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.13, 'avg_loss': 0.99}
+  1%|          | 60/9360 [38:41<99:00:03, 38.32s/it]  1%|          | 61/9360 [39:19<98:55:01, 38.29s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 62/9360 [39:57<99:08:50, 38.39s/it]  1%|          | 63/9360 [40:36<99:32:44, 38.55s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 64/9360 [41:15<99:23:08, 38.49s/it]  1%|          | 65/9360 [41:54<100:17:30, 38.84s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 66/9360 [42:33<100:28:50, 38.92s/it]  1%|          | 67/9360 [43:13<101:02:13, 39.14s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 68/9360 [43:52<100:41:49, 39.01s/it]  1%|          | 69/9360 [44:31<100:35:56, 38.98s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 70/9360 [45:09<100:10:51, 38.82s/it]                                                     {'loss': 8.9912, 'grad_norm': 33.79419708251953, 'learning_rate': 3.5e-08, 'kl': 0.00596923828125, 'prefs/chosen': 0.3143163647502661, 'prefs/rejected': 0.11643178188242018, 'prefs/margins': 0.19788458477705717, 'rewards/chosen': 6.72459602355957e-05, 'rewards/rejected': 2.263784408569336e-05, 'rewards/margins': 4.459619522094727e-05, 'rewards/accuracies': 0.3671875, 'logps/chosen': -2.01728515625, 'logps/rejected': -1.94755859375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.15, 'avg_loss': 1.1239}
+  1%|          | 70/9360 [45:09<100:10:51, 38.82s/it]  1%|          | 71/9360 [45:48<100:01:21, 38.76s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 72/9360 [46:27<100:37:02, 39.00s/it]  1%|          | 73/9360 [47:06<100:04:13, 38.79s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 74/9360 [47:44<100:03:00, 38.79s/it]  1%|          | 75/9360 [48:23<99:45:38, 38.68s/it] _load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 76/9360 [49:01<99:05:13, 38.42s/it]  1%|          | 77/9360 [49:40<99:25:15, 38.56s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 78/9360 [50:18<99:34:56, 38.62s/it]  1%|          | 79/9360 [50:57<99:15:35, 38.50s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 80/9360 [51:35<99:25:35, 38.57s/it]                                                    {'loss': 8.6886, 'grad_norm': 17.712535858154297, 'learning_rate': 4e-08, 'kl': 0.006256103515625, 'prefs/chosen': 0.3171252993866801, 'prefs/rejected': 0.12226028894074262, 'prefs/margins': 0.1948650096077472, 'rewards/chosen': -5.4389238357543945e-06, 'rewards/rejected': 2.135634422302246e-05, 'rewards/margins': -2.689361572265625e-05, 'rewards/accuracies': 0.3640625, 'logps/chosen': -2.0755859375, 'logps/rejected': -2.24306640625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.17, 'avg_loss': 1.086075}
+  1%|          | 80/9360 [51:35<99:25:35, 38.57s/it]  1%|          | 81/9360 [52:14<99:41:20, 38.68s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 82/9360 [52:53<99:52:21, 38.75s/it]  1%|          | 83/9360 [53:32<100:03:11, 38.83s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 84/9360 [54:10<99:34:16, 38.64s/it]   1%|          | 85/9360 [54:49<99:51:58, 38.76s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 86/9360 [55:28<100:05:59, 38.86s/it]  1%|          | 87/9360 [56:06<99:18:06, 38.55s/it] _load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 88/9360 [56:45<99:21:27, 38.58s/it]  1%|          | 89/9360 [57:24<99:31:25, 38.65s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 90/9360 [58:03<100:06:12, 38.88s/it]                                                     {'loss': 8.725, 'grad_norm': 16.33266258239746, 'learning_rate': 4.5e-08, 'kl': 0.0066009521484375, 'prefs/chosen': 0.3107620008289814, 'prefs/rejected': 0.11375599931925535, 'prefs/margins': 0.1970060019288212, 'rewards/chosen': 2.7489662170410156e-05, 'rewards/rejected': 8.307397365570068e-05, 'rewards/margins': -5.553364753723145e-05, 'rewards/accuracies': 0.3515625, 'logps/chosen': -2.1244140625, 'logps/rejected': -2.0982421875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.19, 'avg_loss': 1.090625}
+  1%|          | 90/9360 [58:03<100:06:12, 38.88s/it]  1%|          | 91/9360 [58:42<99:44:51, 38.74s/it] _load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 92/9360 [59:20<99:12:59, 38.54s/it]  1%|          | 93/9360 [59:58<99:10:44, 38.53s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 94/9360 [1:00:37<99:16:35, 38.57s/it]  1%|          | 95/9360 [1:01:16<99:32:55, 38.68s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 96/9360 [1:01:54<99:12:36, 38.55s/it]  1%|          | 97/9360 [1:02:33<99:15:45, 38.58s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 98/9360 [1:03:11<99:04:01, 38.51s/it]  1%|          | 99/9360 [1:03:49<99:03:42, 38.51s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 100/9360 [1:04:27<98:28:28, 38.28s/it]                                                       {'loss': 7.8903, 'grad_norm': 18.346641540527344, 'learning_rate': 5e-08, 'kl': 0.0059661865234375, 'prefs/chosen': 0.30121672097593544, 'prefs/rejected': 0.11690685888752342, 'prefs/margins': 0.18430986423045398, 'rewards/chosen': 4.2724609375e-05, 'rewards/rejected': -3.007054328918457e-06, 'rewards/margins': 4.576146602630615e-05, 'rewards/accuracies': 0.3375, 'logps/chosen': -2.21376953125, 'logps/rejected': -2.04287109375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.21, 'avg_loss': 0.9862875}
+  1%|          | 100/9360 [1:04:27<98:28:28, 38.28s/it]  1%|          | 101/9360 [1:05:06<98:58:10, 38.48s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 102/9360 [1:05:45<99:22:55, 38.65s/it]  1%|          | 103/9360 [1:06:24<99:41:34, 38.77s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 104/9360 [1:07:02<98:58:56, 38.50s/it]  1%|          | 105/9360 [1:07:41<99:14:59, 38.61s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 106/9360 [1:08:20<99:23:12, 38.66s/it]  1%|          | 107/9360 [1:08:59<99:36:19, 38.75s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 108/9360 [1:09:37<99:07:44, 38.57s/it]  1%|          | 109/9360 [1:10:16<99:19:51, 38.65s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 110/9360 [1:10:54<99:05:53, 38.57s/it]                                                       {'loss': 8.3359, 'grad_norm': 15.766558647155762, 'learning_rate': 5.4999999999999996e-08, 'kl': 0.00648193359375, 'prefs/chosen': 0.31161534823477266, 'prefs/rejected': 0.12361021074466408, 'prefs/margins': 0.18800513674505054, 'rewards/chosen': -1.1581182479858399e-05, 'rewards/rejected': 5.577206611633301e-05, 'rewards/margins': -6.732046604156494e-05, 'rewards/accuracies': 0.359375, 'logps/chosen': -2.150390625, 'logps/rejected': -2.05625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.23, 'avg_loss': 1.0419875}
+  1%|          | 110/9360 [1:10:54<99:05:53, 38.57s/it]  1%|          | 111/9360 [1:11:32<98:42:22, 38.42s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 112/9360 [1:12:11<98:56:07, 38.51s/it]  1%|          | 113/9360 [1:12:50<99:18:33, 38.66s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 114/9360 [1:13:29<99:27:36, 38.73s/it]  1%|          | 115/9360 [1:14:07<99:11:08, 38.62s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|          | 116/9360 [1:14:46<98:59:57, 38.55s/it]  1%|▏         | 117/9360 [1:15:25<99:19:43, 38.69s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 118/9360 [1:16:03<99:01:05, 38.57s/it]  1%|▏         | 119/9360 [1:16:42<99:22:39, 38.71s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 120/9360 [1:17:21<99:59:51, 38.96s/it]                                                       {'loss': 9.7396, 'grad_norm': 24.07382583618164, 'learning_rate': 6e-08, 'kl': 0.0069244384765625, 'prefs/chosen': 0.33140382878482344, 'prefs/rejected': 0.1259869674220681, 'prefs/margins': 0.20541685866191983, 'rewards/chosen': 2.199411392211914e-05, 'rewards/rejected': 8.920133113861084e-05, 'rewards/margins': -6.701052188873291e-05, 'rewards/accuracies': 0.3640625, 'logps/chosen': -2.20068359375, 'logps/rejected': -2.2357421875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.26, 'avg_loss': 1.21745}
+  1%|▏         | 120/9360 [1:17:21<99:59:51, 38.96s/it]  1%|▏         | 121/9360 [1:18:00<99:57:48, 38.95s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 122/9360 [1:18:39<99:44:04, 38.87s/it]  1%|▏         | 123/9360 [1:19:17<98:58:59, 38.58s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 124/9360 [1:19:55<98:43:49, 38.48s/it]  1%|▏         | 125/9360 [1:20:33<98:30:36, 38.40s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 126/9360 [1:21:12<98:29:17, 38.40s/it]  1%|▏         | 127/9360 [1:21:50<98:23:18, 38.36s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 128/9360 [1:22:28<98:09:29, 38.28s/it]  1%|▏         | 129/9360 [1:23:08<99:14:23, 38.70s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 130/9360 [1:23:47<99:50:04, 38.94s/it]                                                       {'loss': 9.5936, 'grad_norm': 26.243330001831055, 'learning_rate': 6.5e-08, 'kl': 0.0061859130859375, 'prefs/chosen': 0.3173965782858431, 'prefs/rejected': 0.11536744222976267, 'prefs/margins': 0.20202913247048854, 'rewards/chosen': 2.1645426750183104e-05, 'rewards/rejected': 8.125007152557374e-05, 'rewards/margins': -5.9771537780761716e-05, 'rewards/accuracies': 0.3515625, 'logps/chosen': -2.15146484375, 'logps/rejected': -2.05107421875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.28, 'avg_loss': 1.1992}
+  1%|▏         | 130/9360 [1:23:47<99:50:04, 38.94s/it]  1%|▏         | 131/9360 [1:24:27<99:59:55, 39.01s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 132/9360 [1:25:05<99:49:11, 38.94s/it]  1%|▏         | 133/9360 [1:25:44<99:28:58, 38.81s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 134/9360 [1:26:23<99:29:42, 38.82s/it]  1%|▏         | 135/9360 [1:27:01<99:05:43, 38.67s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 136/9360 [1:27:40<99:39:16, 38.89s/it]  1%|▏         | 137/9360 [1:28:19<99:06:29, 38.68s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 138/9360 [1:28:58<99:21:01, 38.78s/it]  1%|▏         | 139/9360 [1:29:37<99:37:31, 38.90s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  1%|▏         | 140/9360 [1:30:15<99:03:29, 38.68s/it]                                                       {'loss': 8.5645, 'grad_norm': 21.50437355041504, 'learning_rate': 7e-08, 'kl': 0.0071685791015625, 'prefs/chosen': 0.3203986447304487, 'prefs/rejected': 0.12418104568496346, 'prefs/margins': 0.19621759899891913, 'rewards/chosen': 0.00029574334621429443, 'rewards/rejected': 0.00016789436340332032, 'rewards/margins': 0.00012750625610351561, 'rewards/accuracies': 0.39375, 'logps/chosen': -2.24853515625, 'logps/rejected': -2.16806640625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.3, 'avg_loss': 1.0705625}
+  1%|▏         | 140/9360 [1:30:15<99:03:29, 38.68s/it]  2%|▏         | 141/9360 [1:30:54<99:24:58, 38.82s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 142/9360 [1:31:33<99:44:17, 38.95s/it]  2%|▏         | 143/9360 [1:32:12<99:18:50, 38.79s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 144/9360 [1:32:50<99:10:21, 38.74s/it]  2%|▏         | 145/9360 [1:33:29<99:04:23, 38.70s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 146/9360 [1:34:07<98:44:20, 38.58s/it]  2%|▏         | 147/9360 [1:34:46<98:52:23, 38.63s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 148/9360 [1:35:25<98:42:34, 38.58s/it]  2%|▏         | 149/9360 [1:36:04<99:44:27, 38.98s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 150/9360 [1:36:43<99:33:09, 38.91s/it]                                                       {'loss': 9.6556, 'grad_norm': 38.62406921386719, 'learning_rate': 7.5e-08, 'kl': 0.006683349609375, 'prefs/chosen': 0.32539027016609906, 'prefs/rejected': 0.11922446098178625, 'prefs/margins': 0.2061658083461225, 'rewards/chosen': 0.00013769567012786866, 'rewards/rejected': 0.00012412667274475098, 'rewards/margins': 1.3342499732971191e-05, 'rewards/accuracies': 0.3703125, 'logps/chosen': -2.13818359375, 'logps/rejected': -2.12509765625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.32, 'avg_loss': 1.20695}
+  2%|▏         | 150/9360 [1:36:43<99:33:09, 38.91s/it]  2%|▏         | 151/9360 [1:37:21<98:50:45, 38.64s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 152/9360 [1:38:00<98:38:27, 38.57s/it]  2%|▏         | 153/9360 [1:38:38<98:42:23, 38.59s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 154/9360 [1:39:16<98:15:05, 38.42s/it]  2%|▏         | 155/9360 [1:39:55<98:22:15, 38.47s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 156/9360 [1:40:33<97:54:39, 38.30s/it]  2%|▏         | 157/9360 [1:41:12<98:24:39, 38.50s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 158/9360 [1:41:51<98:43:09, 38.62s/it]  2%|▏         | 159/9360 [1:42:29<98:19:40, 38.47s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 160/9360 [1:43:07<98:22:42, 38.50s/it]                                                       {'loss': 8.6918, 'grad_norm': 15.786686897277832, 'learning_rate': 8e-08, 'kl': 0.00653076171875, 'prefs/chosen': 0.3155902560800314, 'prefs/rejected': 0.1221462962217629, 'prefs/margins': 0.19344395943917334, 'rewards/chosen': 0.00015814900398254396, 'rewards/rejected': -1.3363361358642577e-05, 'rewards/margins': 0.00017158687114715576, 'rewards/accuracies': 0.409375, 'logps/chosen': -2.08232421875, 'logps/rejected': -1.99609375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.34, 'avg_loss': 1.086475}
+  2%|▏         | 160/9360 [1:43:07<98:22:42, 38.50s/it]  2%|▏         | 161/9360 [1:43:46<98:25:53, 38.52s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 162/9360 [1:44:25<98:39:54, 38.62s/it]  2%|▏         | 163/9360 [1:45:03<98:14:18, 38.45s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 164/9360 [1:45:42<99:04:18, 38.78s/it]  2%|▏         | 165/9360 [1:46:21<98:46:22, 38.67s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 166/9360 [1:47:00<98:56:40, 38.74s/it]  2%|▏         | 167/9360 [1:47:39<99:40:01, 39.03s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 168/9360 [1:48:18<99:04:37, 38.80s/it]  2%|▏         | 169/9360 [1:48:57<99:07:49, 38.83s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 170/9360 [1:49:34<98:27:22, 38.57s/it]                                                       {'loss': 9.6185, 'grad_norm': 20.0343074798584, 'learning_rate': 8.500000000000001e-08, 'kl': 0.0081085205078125, 'prefs/chosen': 0.3201124411076307, 'prefs/rejected': 0.11250260672532023, 'prefs/margins': 0.20760983610525727, 'rewards/chosen': 0.00035304427146911623, 'rewards/rejected': 0.0001349031925201416, 'rewards/margins': 0.00021845102310180664, 'rewards/accuracies': 0.390625, 'logps/chosen': -2.102734375, 'logps/rejected': -2.04150390625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.36, 'avg_loss': 1.2023125}
+  2%|▏         | 170/9360 [1:49:34<98:27:22, 38.57s/it]  2%|▏         | 171/9360 [1:50:14<99:09:57, 38.85s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 172/9360 [1:50:53<99:15:21, 38.89s/it]  2%|▏         | 173/9360 [1:51:31<98:19:51, 38.53s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 174/9360 [1:52:09<98:22:43, 38.55s/it]  2%|▏         | 175/9360 [1:52:48<98:35:25, 38.64s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 176/9360 [1:53:26<98:17:03, 38.53s/it]  2%|▏         | 177/9360 [1:54:07<99:36:02, 39.05s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 178/9360 [1:54:45<99:10:41, 38.88s/it]  2%|▏         | 179/9360 [1:55:24<99:17:26, 38.93s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 180/9360 [1:56:03<99:02:51, 38.84s/it]                                                       {'loss': 7.8003, 'grad_norm': 18.285888671875, 'learning_rate': 9e-08, 'kl': 0.007708740234375, 'prefs/chosen': 0.3042101375758648, 'prefs/rejected': 0.11842171046882868, 'prefs/margins': 0.18578842654824257, 'rewards/chosen': 0.000354999303817749, 'rewards/rejected': 0.00014300048351287842, 'rewards/margins': 0.00021185874938964844, 'rewards/accuracies': 0.403125, 'logps/chosen': -2.130859375, 'logps/rejected': -2.06552734375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.38, 'avg_loss': 0.9750375}
+  2%|▏         | 180/9360 [1:56:03<99:02:51, 38.84s/it]  2%|▏         | 181/9360 [1:56:42<99:35:26, 39.06s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 182/9360 [1:57:21<99:08:57, 38.89s/it]  2%|▏         | 183/9360 [1:58:00<99:09:46, 38.90s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 184/9360 [1:58:38<98:51:43, 38.79s/it]  2%|▏         | 185/9360 [1:59:17<98:42:25, 38.73s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 186/9360 [1:59:55<98:14:33, 38.55s/it]  2%|▏         | 187/9360 [2:00:34<98:14:53, 38.56s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 188/9360 [2:01:12<98:19:53, 38.60s/it]  2%|▏         | 189/9360 [2:01:51<98:01:30, 38.48s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 190/9360 [2:02:29<98:15:26, 38.57s/it]                                                       {'loss': 8.4652, 'grad_norm': 46.78691864013672, 'learning_rate': 9.499999999999999e-08, 'kl': 0.00752716064453125, 'prefs/chosen': 0.3176358873024583, 'prefs/rejected': 0.12151803784072399, 'prefs/margins': 0.19611785053275527, 'rewards/chosen': 0.0003950268030166626, 'rewards/rejected': 0.0001520782709121704, 'rewards/margins': 0.00024278163909912108, 'rewards/accuracies': 0.4, 'logps/chosen': -2.048046875, 'logps/rejected': -1.95166015625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.41, 'avg_loss': 1.05815}
+  2%|▏         | 190/9360 [2:02:29<98:15:26, 38.57s/it]  2%|▏         | 191/9360 [2:03:09<98:46:48, 38.78s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 192/9360 [2:03:47<98:42:03, 38.76s/it]  2%|▏         | 193/9360 [2:04:27<99:03:06, 38.90s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 194/9360 [2:05:04<98:19:45, 38.62s/it]  2%|▏         | 195/9360 [2:05:43<97:55:21, 38.46s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 196/9360 [2:06:20<97:26:45, 38.28s/it]  2%|▏         | 197/9360 [2:06:59<97:54:16, 38.47s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 198/9360 [2:07:37<97:33:59, 38.34s/it]  2%|▏         | 199/9360 [2:08:17<98:19:38, 38.64s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 200/9360 [2:08:55<98:08:21, 38.57s/it]                                                       {'loss': 8.8048, 'grad_norm': 19.626131057739258, 'learning_rate': 1e-07, 'kl': 0.0091033935546875, 'prefs/chosen': 0.31733325589448214, 'prefs/rejected': 0.12092705494724214, 'prefs/margins': 0.19640620141290127, 'rewards/chosen': 0.0006982803344726563, 'rewards/rejected': 0.00023661255836486815, 'rewards/margins': 0.0004614591598510742, 'rewards/accuracies': 0.4296875, 'logps/chosen': -2.1162109375, 'logps/rejected': -1.94521484375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.43, 'avg_loss': 1.1006}
+  2%|▏         | 200/9360 [2:08:55<98:08:21, 38.57s/it]  2%|▏         | 201/9360 [2:09:33<97:50:23, 38.46s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 202/9360 [2:10:12<97:48:12, 38.45s/it]  2%|▏         | 203/9360 [2:10:50<97:49:56, 38.46s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 204/9360 [2:11:29<97:48:52, 38.46s/it]  2%|▏         | 205/9360 [2:12:07<97:42:13, 38.42s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 206/9360 [2:12:46<97:46:28, 38.45s/it]  2%|▏         | 207/9360 [2:13:24<97:52:04, 38.49s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 208/9360 [2:14:03<98:23:42, 38.70s/it]  2%|▏         | 209/9360 [2:14:42<98:30:45, 38.75s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 210/9360 [2:15:21<98:49:45, 38.88s/it]                                                       {'loss': 8.9524, 'grad_norm': 25.856975555419922, 'learning_rate': 1.0499999999999999e-07, 'kl': 0.0098846435546875, 'prefs/chosen': 0.3157708844169974, 'prefs/rejected': 0.11720877527259291, 'prefs/margins': 0.1985621070023626, 'rewards/chosen': 0.0006601482629776001, 'rewards/rejected': 0.00044167041778564453, 'rewards/margins': 0.0002185046672821045, 'rewards/accuracies': 0.3875, 'logps/chosen': -2.08212890625, 'logps/rejected': -2.066015625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.45, 'avg_loss': 1.11905}
+  2%|▏         | 210/9360 [2:15:21<98:49:45, 38.88s/it]  2%|▏         | 211/9360 [2:16:00<98:47:27, 38.87s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 212/9360 [2:16:38<98:15:07, 38.66s/it]  2%|▏         | 213/9360 [2:17:18<98:51:23, 38.91s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 214/9360 [2:17:57<99:06:29, 39.01s/it]  2%|▏         | 215/9360 [2:18:36<98:36:50, 38.82s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 216/9360 [2:19:15<98:50:16, 38.91s/it]  2%|▏         | 217/9360 [2:19:53<98:09:10, 38.65s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 218/9360 [2:20:31<97:48:49, 38.52s/it]  2%|▏         | 219/9360 [2:21:09<97:51:29, 38.54s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 220/9360 [2:21:48<97:48:47, 38.53s/it]                                                       {'loss': 9.4218, 'grad_norm': 19.33519172668457, 'learning_rate': 1.0999999999999999e-07, 'kl': 0.0114288330078125, 'prefs/chosen': 0.3266511756926775, 'prefs/rejected': 0.11904978100210428, 'prefs/margins': 0.2076013927347958, 'rewards/chosen': 0.0009700179100036622, 'rewards/rejected': 0.00047018826007843016, 'rewards/margins': 0.0004998147487640381, 'rewards/accuracies': 0.4171875, 'logps/chosen': -2.21455078125, 'logps/rejected': -2.06943359375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.47, 'avg_loss': 1.177725}
+  2%|▏         | 220/9360 [2:21:48<97:48:47, 38.53s/it]  2%|▏         | 221/9360 [2:22:26<97:23:27, 38.36s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 222/9360 [2:23:05<97:32:13, 38.43s/it]  2%|▏         | 223/9360 [2:23:43<97:37:56, 38.47s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 224/9360 [2:24:22<97:53:16, 38.57s/it]  2%|▏         | 225/9360 [2:25:01<98:23:26, 38.77s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 226/9360 [2:25:40<98:03:17, 38.65s/it]  2%|▏         | 227/9360 [2:26:18<97:37:08, 38.48s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 228/9360 [2:26:55<96:59:23, 38.24s/it]  2%|▏         | 229/9360 [2:27:33<96:42:33, 38.13s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 230/9360 [2:28:11<96:27:51, 38.04s/it]                                                       {'loss': 8.4778, 'grad_norm': 32.96183776855469, 'learning_rate': 1.15e-07, 'kl': 0.01219482421875, 'prefs/chosen': 0.31460741609334947, 'prefs/rejected': 0.12413995200768113, 'prefs/margins': 0.19046746427193284, 'rewards/chosen': 0.0008833229541778565, 'rewards/rejected': 0.0006776571273803711, 'rewards/margins': 0.0002059251070022583, 'rewards/accuracies': 0.3953125, 'logps/chosen': -2.08857421875, 'logps/rejected': -2.148828125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.49, 'avg_loss': 1.059725}
+  2%|▏         | 230/9360 [2:28:11<96:27:51, 38.04s/it]  2%|▏         | 231/9360 [2:28:50<97:02:19, 38.27s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▏         | 232/9360 [2:29:29<97:41:35, 38.53s/it]  2%|▏         | 233/9360 [2:30:07<97:31:03, 38.46s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  2%|▎         | 234/9360 [2:30:46<97:34:05, 38.49s/it]  3%|▎         | 235/9360 [2:31:25<98:04:13, 38.69s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 236/9360 [2:32:04<98:15:05, 38.77s/it]  3%|▎         | 237/9360 [2:32:42<98:07:31, 38.72s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 238/9360 [2:33:22<98:50:20, 39.01s/it]  3%|▎         | 239/9360 [2:34:00<98:05:00, 38.71s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 240/9360 [2:34:40<98:48:22, 39.00s/it]                                                       {'loss': 8.3847, 'grad_norm': 20.38911247253418, 'learning_rate': 1.2e-07, 'kl': 0.0147003173828125, 'prefs/chosen': 0.31337872315198184, 'prefs/rejected': 0.11986383274197579, 'prefs/margins': 0.19351488957181573, 'rewards/chosen': 0.0012716025114059449, 'rewards/rejected': 0.0008800387382507324, 'rewards/margins': 0.0003917127847671509, 'rewards/accuracies': 0.384375, 'logps/chosen': -2.19287109375, 'logps/rejected': -2.0794921875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.51, 'avg_loss': 1.0480875}
+  3%|▎         | 240/9360 [2:34:40<98:48:22, 39.00s/it]  3%|▎         | 241/9360 [2:35:18<98:26:45, 38.86s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 242/9360 [2:35:57<98:10:41, 38.76s/it]  3%|▎         | 243/9360 [2:36:35<97:47:56, 38.62s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 244/9360 [2:37:14<97:38:49, 38.56s/it]  3%|▎         | 245/9360 [2:37:52<97:46:06, 38.61s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 246/9360 [2:38:31<97:36:32, 38.56s/it]  3%|▎         | 247/9360 [2:39:09<97:34:40, 38.55s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 248/9360 [2:39:47<97:05:08, 38.36s/it]  3%|▎         | 249/9360 [2:40:26<97:31:36, 38.54s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 250/9360 [2:41:04<97:11:27, 38.41s/it]                                                       {'loss': 9.1422, 'grad_norm': 18.37594223022461, 'learning_rate': 1.25e-07, 'kl': 0.0186798095703125, 'prefs/chosen': 0.3226487262174487, 'prefs/rejected': 0.12468857914209366, 'prefs/margins': 0.19796014931052924, 'rewards/chosen': 0.0017035424709320069, 'rewards/rejected': 0.001273968815803528, 'rewards/margins': 0.00042862892150878905, 'rewards/accuracies': 0.40625, 'logps/chosen': -2.26494140625, 'logps/rejected': -2.142578125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.53, 'avg_loss': 1.142775}
+  3%|▎         | 250/9360 [2:41:04<97:11:27, 38.41s/it]  3%|▎         | 251/9360 [2:41:42<96:54:04, 38.30s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 252/9360 [2:42:21<97:22:59, 38.49s/it]  3%|▎         | 253/9360 [2:42:59<96:47:24, 38.26s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 254/9360 [2:43:36<96:05:50, 37.99s/it]  3%|▎         | 255/9360 [2:44:15<96:34:36, 38.19s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 256/9360 [2:44:53<96:24:57, 38.13s/it]  3%|▎         | 257/9360 [2:45:32<96:43:57, 38.26s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 258/9360 [2:46:10<96:43:31, 38.26s/it]  3%|▎         | 259/9360 [2:46:48<97:00:21, 38.37s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 260/9360 [2:47:27<96:47:16, 38.29s/it]                                                       {'loss': 8.3574, 'grad_norm': 33.91920471191406, 'learning_rate': 1.3e-07, 'kl': 0.0189910888671875, 'prefs/chosen': 0.3050081321969628, 'prefs/rejected': 0.11929850955493748, 'prefs/margins': 0.18570962543599306, 'rewards/chosen': 0.0018790900707244874, 'rewards/rejected': 0.0011092096567153931, 'rewards/margins': 0.0007695019245147705, 'rewards/accuracies': 0.44375, 'logps/chosen': -2.24541015625, 'logps/rejected': -2.1048828125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.55, 'avg_loss': 1.044675}
+  3%|▎         | 260/9360 [2:47:27<96:47:16, 38.29s/it]  3%|▎         | 261/9360 [2:48:05<96:58:10, 38.37s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 262/9360 [2:48:44<97:09:37, 38.45s/it]  3%|▎         | 263/9360 [2:49:22<97:06:06, 38.43s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 264/9360 [2:50:01<97:12:40, 38.47s/it]  3%|▎         | 265/9360 [2:50:41<98:18:16, 38.91s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 266/9360 [2:51:19<97:55:38, 38.77s/it]  3%|▎         | 267/9360 [2:51:59<98:30:27, 39.00s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 268/9360 [2:52:36<97:26:52, 38.58s/it]  3%|▎         | 269/9360 [2:53:15<97:38:36, 38.67s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 270/9360 [2:53:54<97:58:39, 38.80s/it]                                                       {'loss': 7.6229, 'grad_norm': 19.438644409179688, 'learning_rate': 1.35e-07, 'kl': 0.01744384765625, 'prefs/chosen': 0.30273968204855917, 'prefs/rejected': 0.12145488564856351, 'prefs/margins': 0.1812847970984876, 'rewards/chosen': 0.0016366124153137207, 'rewards/rejected': 0.0011897891759872436, 'rewards/margins': 0.00044622421264648435, 'rewards/accuracies': 0.378125, 'logps/chosen': -2.08388671875, 'logps/rejected': -2.10791015625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.58, 'avg_loss': 0.9528625}
+  3%|▎         | 270/9360 [2:53:54<97:58:39, 38.80s/it]  3%|▎         | 271/9360 [2:54:34<98:23:12, 38.97s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 272/9360 [2:55:13<98:22:01, 38.97s/it]  3%|▎         | 273/9360 [2:55:52<98:25:20, 38.99s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 274/9360 [2:56:31<98:25:35, 39.00s/it]  3%|▎         | 275/9360 [2:57:09<98:14:14, 38.93s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 276/9360 [2:57:49<98:44:27, 39.13s/it]  3%|▎         | 277/9360 [2:58:27<98:10:52, 38.91s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 278/9360 [2:59:06<97:44:42, 38.75s/it]  3%|▎         | 279/9360 [2:59:44<97:07:56, 38.51s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 280/9360 [3:00:23<97:40:37, 38.73s/it]                                                       {'loss': 8.3322, 'grad_norm': 20.269515991210938, 'learning_rate': 1.4e-07, 'kl': 0.0187347412109375, 'prefs/chosen': 0.3163521234877408, 'prefs/rejected': 0.12035261746495962, 'prefs/margins': 0.19599950420670212, 'rewards/chosen': 0.0015761077404022217, 'rewards/rejected': 0.001465773582458496, 'rewards/margins': 0.00011113584041595459, 'rewards/accuracies': 0.384375, 'logps/chosen': -2.1486328125, 'logps/rejected': -2.22373046875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.6, 'avg_loss': 1.041525}
+  3%|▎         | 280/9360 [3:00:23<97:40:37, 38.73s/it]  3%|▎         | 281/9360 [3:01:01<97:20:36, 38.60s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 282/9360 [3:01:40<97:11:55, 38.55s/it]  3%|▎         | 283/9360 [3:02:18<97:17:06, 38.58s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 284/9360 [3:02:57<97:14:50, 38.57s/it]  3%|▎         | 285/9360 [3:03:35<97:14:40, 38.58s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 286/9360 [3:04:14<97:10:23, 38.55s/it]  3%|▎         | 287/9360 [3:04:52<97:02:08, 38.50s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 288/9360 [3:05:31<97:18:17, 38.61s/it]  3%|▎         | 289/9360 [3:06:10<97:13:12, 38.58s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 290/9360 [3:06:49<97:29:25, 38.70s/it]                                                       {'loss': 8.5681, 'grad_norm': 25.35801124572754, 'learning_rate': 1.45e-07, 'kl': 0.0144866943359375, 'prefs/chosen': 0.314215880446136, 'prefs/rejected': 0.1187436846550554, 'prefs/margins': 0.19547219313681125, 'rewards/chosen': 0.00120849609375, 'rewards/rejected': 0.0009215801954269409, 'rewards/margins': 0.0002876937389373779, 'rewards/accuracies': 0.4, 'logps/chosen': -2.0580078125, 'logps/rejected': -2.0892578125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.62, 'avg_loss': 1.0710125}
+  3%|▎         | 290/9360 [3:06:49<97:29:25, 38.70s/it]  3%|▎         | 291/9360 [3:07:27<97:06:52, 38.55s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 292/9360 [3:08:05<97:03:13, 38.53s/it]  3%|▎         | 293/9360 [3:08:44<97:28:05, 38.70s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 294/9360 [3:09:23<97:25:46, 38.69s/it]  3%|▎         | 295/9360 [3:10:02<97:27:48, 38.71s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 296/9360 [3:10:40<97:07:47, 38.58s/it]  3%|▎         | 297/9360 [3:11:18<96:40:39, 38.40s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 298/9360 [3:11:56<96:30:49, 38.34s/it]  3%|▎         | 299/9360 [3:12:36<97:09:20, 38.60s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 300/9360 [3:13:14<96:53:05, 38.50s/it]                                                       {'loss': 8.8156, 'grad_norm': 32.417606353759766, 'learning_rate': 1.5e-07, 'kl': 0.01392822265625, 'prefs/chosen': 0.31674811001867054, 'prefs/rejected': 0.11832151603884995, 'prefs/margins': 0.19842659402638674, 'rewards/chosen': 0.0013988554477691651, 'rewards/rejected': 0.0006583750247955323, 'rewards/margins': 0.0007411867380142211, 'rewards/accuracies': 0.440625, 'logps/chosen': -2.1572265625, 'logps/rejected': -2.063671875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.64, 'avg_loss': 1.10195}
+  3%|▎         | 300/9360 [3:13:14<96:53:05, 38.50s/it]  3%|▎         | 301/9360 [3:13:54<98:03:51, 38.97s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 302/9360 [3:14:32<97:47:11, 38.86s/it]  3%|▎         | 303/9360 [3:15:12<98:16:42, 39.06s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 304/9360 [3:15:51<98:23:36, 39.11s/it]  3%|▎         | 305/9360 [3:16:30<98:03:07, 38.98s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 306/9360 [3:17:08<97:26:43, 38.75s/it]  3%|▎         | 307/9360 [3:17:46<96:49:39, 38.50s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 308/9360 [3:18:25<97:00:23, 38.58s/it]  3%|▎         | 309/9360 [3:19:04<97:38:10, 38.83s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 310/9360 [3:19:43<97:28:06, 38.77s/it]                                                       {'loss': 9.8298, 'grad_norm': 15.68981647491455, 'learning_rate': 1.55e-07, 'kl': 0.0154052734375, 'prefs/chosen': 0.33010037429630756, 'prefs/rejected': 0.11788213681429624, 'prefs/margins': 0.21221823263913392, 'rewards/chosen': 0.0015082180500030518, 'rewards/rejected': 0.0008630096912384033, 'rewards/margins': 0.0006448954343795776, 'rewards/accuracies': 0.421875, 'logps/chosen': -2.102734375, 'logps/rejected': -2.0107421875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.66, 'avg_loss': 1.228725}
+  3%|▎         | 310/9360 [3:19:43<97:28:06, 38.77s/it]  3%|▎         | 311/9360 [3:20:22<97:34:42, 38.82s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 312/9360 [3:21:01<97:37:38, 38.84s/it]  3%|▎         | 313/9360 [3:21:40<97:51:43, 38.94s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 314/9360 [3:22:18<97:26:19, 38.78s/it]  3%|▎         | 315/9360 [3:22:58<97:56:48, 38.98s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 316/9360 [3:23:36<97:26:36, 38.79s/it]  3%|▎         | 317/9360 [3:24:14<96:57:16, 38.60s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 318/9360 [3:24:53<97:25:15, 38.79s/it]  3%|▎         | 319/9360 [3:25:33<98:14:53, 39.12s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 320/9360 [3:26:12<97:50:41, 38.96s/it]                                                       {'loss': 9.8172, 'grad_norm': 20.467092514038086, 'learning_rate': 1.6e-07, 'kl': 0.014923095703125, 'prefs/chosen': 0.3279932340607047, 'prefs/rejected': 0.12183108227327466, 'prefs/margins': 0.20616215337067842, 'rewards/chosen': 0.0014974087476730346, 'rewards/rejected': 0.000732654333114624, 'rewards/margins': 0.0007649332284927369, 'rewards/accuracies': 0.4125, 'logps/chosen': -2.0326171875, 'logps/rejected': -1.96484375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.68, 'avg_loss': 1.22715}
+  3%|▎         | 320/9360 [3:26:12<97:50:41, 38.96s/it]  3%|▎         | 321/9360 [3:26:50<97:05:08, 38.67s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 322/9360 [3:27:28<96:57:33, 38.62s/it]  3%|▎         | 323/9360 [3:28:07<96:52:37, 38.59s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 324/9360 [3:28:46<97:33:50, 38.87s/it]  3%|▎         | 325/9360 [3:29:26<97:52:57, 39.00s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  3%|▎         | 326/9360 [3:30:04<97:31:16, 38.86s/it]  3%|▎         | 327/9360 [3:30:44<98:08:33, 39.11s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 328/9360 [3:31:23<98:20:27, 39.20s/it]  4%|▎         | 329/9360 [3:32:02<97:31:15, 38.87s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 330/9360 [3:32:40<97:25:39, 38.84s/it]                                                       {'loss': 8.6373, 'grad_norm': 28.245376586914062, 'learning_rate': 1.65e-07, 'kl': 0.0167999267578125, 'prefs/chosen': 0.3101116932928562, 'prefs/rejected': 0.11536170523613691, 'prefs/margins': 0.19474998777732253, 'rewards/chosen': 0.0014553874731063842, 'rewards/rejected': 0.0011226236820220947, 'rewards/margins': 0.0003322780132293701, 'rewards/accuracies': 0.3859375, 'logps/chosen': -2.01435546875, 'logps/rejected': -2.07353515625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.7, 'avg_loss': 1.0796625}
+  4%|▎         | 330/9360 [3:32:40<97:25:39, 38.84s/it]  4%|▎         | 331/9360 [3:33:18<96:47:41, 38.59s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 332/9360 [3:33:57<97:07:58, 38.73s/it]  4%|▎         | 333/9360 [3:34:36<97:20:49, 38.82s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 334/9360 [3:35:15<97:10:58, 38.76s/it]  4%|▎         | 335/9360 [3:35:54<97:05:17, 38.73s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 336/9360 [3:36:32<96:31:07, 38.50s/it]  4%|▎         | 337/9360 [3:37:11<96:48:12, 38.62s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 338/9360 [3:37:49<96:38:43, 38.56s/it]  4%|▎         | 339/9360 [3:38:27<96:17:35, 38.43s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 340/9360 [3:39:07<97:27:02, 38.89s/it]                                                       {'loss': 9.0964, 'grad_norm': 19.84160041809082, 'learning_rate': 1.7000000000000001e-07, 'kl': 0.02314453125, 'prefs/chosen': 0.32820254676043986, 'prefs/rejected': 0.12375368727371097, 'prefs/margins': 0.2044488619081676, 'rewards/chosen': 0.0025739312171936036, 'rewards/rejected': 0.001476418972015381, 'rewards/margins': 0.0010976433753967286, 'rewards/accuracies': 0.465625, 'logps/chosen': -2.1916015625, 'logps/rejected': -2.15185546875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.73, 'avg_loss': 1.13705}
+  4%|▎         | 340/9360 [3:39:07<97:27:02, 38.89s/it]  4%|▎         | 341/9360 [3:39:46<97:09:55, 38.78s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 342/9360 [3:40:24<96:33:05, 38.54s/it]  4%|▎         | 343/9360 [3:41:03<97:27:56, 38.91s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 344/9360 [3:41:42<97:21:21, 38.87s/it]  4%|▎         | 345/9360 [3:42:20<96:38:53, 38.59s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 346/9360 [3:42:59<96:55:08, 38.71s/it]  4%|▎         | 347/9360 [3:43:37<96:36:48, 38.59s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 348/9360 [3:44:16<96:43:06, 38.64s/it]  4%|▎         | 349/9360 [3:44:55<96:57:19, 38.73s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▎         | 350/9360 [3:45:34<97:01:19, 38.77s/it]                                                       {'loss': 9.2143, 'grad_norm': 22.518009185791016, 'learning_rate': 1.75e-07, 'kl': 0.0205780029296875, 'prefs/chosen': 0.32340888902544973, 'prefs/rejected': 0.11973960646428168, 'prefs/margins': 0.20366928316652774, 'rewards/chosen': 0.0021281182765960694, 'rewards/rejected': 0.0013194084167480469, 'rewards/margins': 0.000807863473892212, 'rewards/accuracies': 0.4265625, 'logps/chosen': -2.0669921875, 'logps/rejected': -2.0759765625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.75, 'avg_loss': 1.1517875}
+  4%|▎         | 350/9360 [3:45:34<97:01:19, 38.77s/it]  4%|▍         | 351/9360 [3:46:12<96:49:00, 38.69s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 352/9360 [3:46:50<96:20:23, 38.50s/it]  4%|▍         | 353/9360 [3:47:29<96:13:55, 38.46s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 354/9360 [3:48:07<95:59:17, 38.37s/it]  4%|▍         | 355/9360 [3:48:46<96:38:38, 38.64s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 356/9360 [3:49:24<95:52:44, 38.33s/it]  4%|▍         | 357/9360 [3:50:02<96:03:08, 38.41s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 358/9360 [3:50:41<96:14:50, 38.49s/it]  4%|▍         | 359/9360 [3:51:20<96:17:14, 38.51s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 360/9360 [3:51:58<96:08:14, 38.45s/it]                                                       {'loss': 8.7503, 'grad_norm': 12.701984405517578, 'learning_rate': 1.8e-07, 'kl': 0.0226470947265625, 'prefs/chosen': 0.3114548772573471, 'prefs/rejected': 0.11437092800624668, 'prefs/margins': 0.1970839474350214, 'rewards/chosen': 0.002347710728645325, 'rewards/rejected': 0.0015241801738739014, 'rewards/margins': 0.0008240640163421631, 'rewards/accuracies': 0.409375, 'logps/chosen': -2.1388671875, 'logps/rejected': -2.107421875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.77, 'avg_loss': 1.0937875}
+  4%|▍         | 360/9360 [3:51:58<96:08:14, 38.45s/it]  4%|▍         | 361/9360 [3:52:37<96:20:31, 38.54s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 362/9360 [3:53:16<96:34:01, 38.64s/it]  4%|▍         | 363/9360 [3:53:55<97:09:09, 38.87s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 364/9360 [3:54:34<96:54:00, 38.78s/it]  4%|▍         | 365/9360 [3:55:12<96:55:32, 38.79s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 366/9360 [3:55:51<96:49:16, 38.75s/it]  4%|▍         | 367/9360 [3:56:30<96:59:50, 38.83s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 368/9360 [3:57:08<96:12:03, 38.51s/it]  4%|▍         | 369/9360 [3:57:47<96:57:50, 38.82s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 370/9360 [3:58:26<96:48:22, 38.77s/it]                                                       {'loss': 7.8074, 'grad_norm': 13.67728328704834, 'learning_rate': 1.85e-07, 'kl': 0.0187530517578125, 'prefs/chosen': 0.31036094557493926, 'prefs/rejected': 0.12093697674572468, 'prefs/margins': 0.18942396990023552, 'rewards/chosen': 0.0017086893320083618, 'rewards/rejected': 0.0013006418943405152, 'rewards/margins': 0.0004095137119293213, 'rewards/accuracies': 0.43125, 'logps/chosen': -2.0798828125, 'logps/rejected': -2.0935546875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.79, 'avg_loss': 0.975925}
+  4%|▍         | 370/9360 [3:58:26<96:48:22, 38.77s/it]  4%|▍         | 371/9360 [3:59:05<96:45:55, 38.75s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 372/9360 [3:59:43<96:22:28, 38.60s/it]  4%|▍         | 373/9360 [4:00:22<96:23:31, 38.61s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 374/9360 [4:01:00<96:23:58, 38.62s/it]  4%|▍         | 375/9360 [4:01:39<96:26:17, 38.64s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 376/9360 [4:02:18<96:34:57, 38.70s/it]  4%|▍         | 377/9360 [4:02:57<96:57:53, 38.86s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 378/9360 [4:03:36<97:06:36, 38.92s/it]  4%|▍         | 379/9360 [4:04:14<96:17:46, 38.60s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 380/9360 [4:04:52<96:09:00, 38.55s/it]                                                       {'loss': 8.4481, 'grad_norm': 24.46284294128418, 'learning_rate': 1.8999999999999998e-07, 'kl': 0.022711181640625, 'prefs/chosen': 0.31368062552064657, 'prefs/rejected': 0.12026848876848817, 'prefs/margins': 0.19341213619336486, 'rewards/chosen': 0.002527773380279541, 'rewards/rejected': 0.0013089418411254884, 'rewards/margins': 0.00121576189994812, 'rewards/accuracies': 0.4296875, 'logps/chosen': -2.28310546875, 'logps/rejected': -2.08828125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.81, 'avg_loss': 1.0560125}
+  4%|▍         | 380/9360 [4:04:52<96:09:00, 38.55s/it]  4%|▍         | 381/9360 [4:05:31<96:07:55, 38.54s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 382/9360 [4:06:10<96:17:22, 38.61s/it]  4%|▍         | 383/9360 [4:06:50<97:12:39, 38.98s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 384/9360 [4:07:27<96:19:12, 38.63s/it]  4%|▍         | 385/9360 [4:08:06<96:39:06, 38.77s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 386/9360 [4:08:46<96:59:17, 38.91s/it]  4%|▍         | 387/9360 [4:09:24<96:53:48, 38.88s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 388/9360 [4:10:02<96:07:58, 38.57s/it]  4%|▍         | 389/9360 [4:10:41<96:08:59, 38.58s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 390/9360 [4:11:19<95:49:04, 38.46s/it]                                                       {'loss': 9.504, 'grad_norm': 27.71448516845703, 'learning_rate': 1.9499999999999999e-07, 'kl': 0.02100830078125, 'prefs/chosen': 0.321910485252738, 'prefs/rejected': 0.11428978806361556, 'prefs/margins': 0.20762069625779986, 'rewards/chosen': 0.0021282702684402464, 'rewards/rejected': 0.0013045817613601685, 'rewards/margins': 0.0008258849382400512, 'rewards/accuracies': 0.4234375, 'logps/chosen': -2.0595703125, 'logps/rejected': -2.06025390625, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.83, 'avg_loss': 1.188}
+  4%|▍         | 390/9360 [4:11:19<95:49:04, 38.46s/it]  4%|▍         | 391/9360 [4:11:58<95:59:18, 38.53s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 392/9360 [4:12:37<96:19:17, 38.67s/it]  4%|▍         | 393/9360 [4:13:15<95:58:49, 38.53s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 394/9360 [4:13:54<96:27:04, 38.73s/it]  4%|▍         | 395/9360 [4:14:32<96:01:31, 38.56s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 396/9360 [4:15:10<95:40:24, 38.42s/it]  4%|▍         | 397/9360 [4:15:49<95:58:45, 38.55s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 398/9360 [4:16:28<95:50:13, 38.50s/it]  4%|▍         | 399/9360 [4:17:06<95:47:21, 38.48s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 400/9360 [4:17:44<95:21:27, 38.31s/it]                                                       {'loss': 8.4185, 'grad_norm': 18.79741859436035, 'learning_rate': 2e-07, 'kl': 0.0221282958984375, 'prefs/chosen': 0.3159634055569768, 'prefs/rejected': 0.12327644960023462, 'prefs/margins': 0.19268695237115024, 'rewards/chosen': 0.0020973563194274904, 'rewards/rejected': 0.0017353057861328124, 'rewards/margins': 0.0003624796867370605, 'rewards/accuracies': 0.4328125, 'logps/chosen': -2.030859375, 'logps/rejected': -2.08779296875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.85, 'avg_loss': 1.0523125}
+  4%|▍         | 400/9360 [4:17:44<95:21:27, 38.31s/it]  4%|▍         | 401/9360 [4:18:22<95:20:54, 38.31s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 402/9360 [4:19:02<96:15:26, 38.68s/it]  4%|▍         | 403/9360 [4:19:40<96:01:27, 38.59s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 404/9360 [4:20:19<96:21:33, 38.73s/it]  4%|▍         | 405/9360 [4:20:58<96:29:37, 38.79s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 406/9360 [4:21:37<96:17:53, 38.72s/it]  4%|▍         | 407/9360 [4:22:15<96:03:46, 38.63s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 408/9360 [4:22:54<95:49:21, 38.53s/it]  4%|▍         | 409/9360 [4:23:33<96:09:25, 38.67s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 410/9360 [4:24:11<96:09:32, 38.68s/it]                                                       {'loss': 7.8488, 'grad_norm': 15.243545532226562, 'learning_rate': 2.0499999999999997e-07, 'kl': 0.019659423828125, 'prefs/chosen': 0.2966047584079206, 'prefs/rejected': 0.1144572226330638, 'prefs/margins': 0.18214753353968263, 'rewards/chosen': 0.0019011378288269043, 'rewards/rejected': 0.0011278510093688965, 'rewards/margins': 0.0007721185684204102, 'rewards/accuracies': 0.4078125, 'logps/chosen': -2.0974609375, 'logps/rejected': -2.07451171875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.87, 'avg_loss': 0.9811}
+  4%|▍         | 410/9360 [4:24:11<96:09:32, 38.68s/it]  4%|▍         | 411/9360 [4:24:49<95:40:45, 38.49s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 412/9360 [4:25:29<96:16:08, 38.73s/it]  4%|▍         | 413/9360 [4:26:07<96:01:00, 38.63s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 414/9360 [4:26:46<96:28:20, 38.82s/it]  4%|▍         | 415/9360 [4:27:25<96:15:24, 38.74s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 416/9360 [4:28:03<96:01:44, 38.65s/it]  4%|▍         | 417/9360 [4:28:42<95:48:20, 38.57s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 418/9360 [4:29:21<96:10:37, 38.72s/it]  4%|▍         | 419/9360 [4:29:59<96:04:44, 38.69s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  4%|▍         | 420/9360 [4:30:39<96:36:13, 38.90s/it]                                                       {'loss': 8.052, 'grad_norm': 17.204612731933594, 'learning_rate': 2.0999999999999997e-07, 'kl': 0.02232666015625, 'prefs/chosen': 0.3041300347074866, 'prefs/rejected': 0.11651261355727911, 'prefs/margins': 0.187617425667122, 'rewards/chosen': 0.0025913149118423464, 'rewards/rejected': 0.001144590973854065, 'rewards/margins': 0.0014464855194091797, 'rewards/accuracies': 0.4375, 'logps/chosen': -2.1337890625, 'logps/rejected': -2.03984375, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.9, 'avg_loss': 1.0065}
+  4%|▍         | 420/9360 [4:30:39<96:36:13, 38.90s/it]  4%|▍         | 421/9360 [4:31:18<96:39:59, 38.93s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 422/9360 [4:31:57<97:03:25, 39.09s/it]  5%|▍         | 423/9360 [4:32:36<96:56:58, 39.05s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 424/9360 [4:33:14<96:21:56, 38.82s/it]  5%|▍         | 425/9360 [4:33:52<95:42:23, 38.56s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 426/9360 [4:34:31<95:58:44, 38.68s/it]  5%|▍         | 427/9360 [4:35:10<96:07:55, 38.74s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 428/9360 [4:35:48<95:37:03, 38.54s/it]  5%|▍         | 429/9360 [4:36:27<95:47:54, 38.62s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 430/9360 [4:37:05<95:25:41, 38.47s/it]                                                       {'loss': 9.6296, 'grad_norm': 16.922801971435547, 'learning_rate': 2.1499999999999998e-07, 'kl': 0.02396240234375, 'prefs/chosen': 0.3247989256866276, 'prefs/rejected': 0.11761235953308642, 'prefs/margins': 0.20718656592071055, 'rewards/chosen': 0.002334970235824585, 'rewards/rejected': 0.0014353126287460327, 'rewards/margins': 0.0008984208106994629, 'rewards/accuracies': 0.4359375, 'logps/chosen': -2.28779296875, 'logps/rejected': -2.22451171875, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.92, 'avg_loss': 1.2037}
+  5%|▍         | 430/9360 [4:37:05<95:25:41, 38.47s/it]  5%|▍         | 431/9360 [4:37:45<96:18:59, 38.83s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 432/9360 [4:38:24<96:36:00, 38.95s/it]  5%|▍         | 433/9360 [4:39:03<96:50:57, 39.06s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 434/9360 [4:39:42<96:13:25, 38.81s/it]  5%|▍         | 435/9360 [4:40:20<96:14:01, 38.82s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 436/9360 [4:41:00<96:43:19, 39.02s/it]  5%|▍         | 437/9360 [4:41:39<96:20:47, 38.87s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 438/9360 [4:42:17<96:15:16, 38.84s/it]  5%|▍         | 439/9360 [4:42:57<96:32:01, 38.96s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 440/9360 [4:43:35<96:20:15, 38.88s/it]                                                       {'loss': 9.0602, 'grad_norm': 17.74855613708496, 'learning_rate': 2.1999999999999998e-07, 'kl': 0.0262451171875, 'prefs/chosen': 0.3334959115833044, 'prefs/rejected': 0.13169918516650797, 'prefs/margins': 0.20179672613739968, 'rewards/chosen': 0.0031830668449401855, 'rewards/rejected': 0.0014210224151611328, 'rewards/margins': 0.00176047682762146, 'rewards/accuracies': 0.4703125, 'logps/chosen': -2.25166015625, 'logps/rejected': -2.21533203125, 'contain_eos_token': 0.0, 'gen_len': 64.0, 'beta': 0.09999999999999984, 'epoch': 0.94, 'avg_loss': 1.132525}
+  5%|▍         | 440/9360 [4:43:35<96:20:15, 38.88s/it]  5%|▍         | 441/9360 [4:44:14<96:05:37, 38.79s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 442/9360 [4:44:52<95:39:42, 38.62s/it]  5%|▍         | 443/9360 [4:45:31<95:53:10, 38.71s/it]_load_legacy_checkpoint current_rank_sd[BASE_OPTIMIZER_STATE]
+  5%|▍         | 444/9360 [4:46:10<95:58:43, 38.75s/it]
