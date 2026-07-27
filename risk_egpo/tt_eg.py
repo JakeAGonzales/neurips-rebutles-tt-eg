@@ -161,10 +161,17 @@ class TTEGTrainer(RiskExtragradientTrainer):
 
         if self.use_tteg:
             assert 0.0 < self.tteg_gamma <= 1.0, "tteg_gamma must be in (0, 1]"
-            assert self.args.estimate_extra_grad, "TT-EG requires --alg eg"
             assert self.args.ypp_samples >= 2, "TT-EG needs ypp_samples >= 2"
             assert self.risk_kind in ("neutral", "cvar", "entropic")
             assert self.tteg_bias_point in ("base", "extrapolated")
+            # The extrapolated bias point evaluates grad(b_hat) at the EG
+            # look-ahead iterate, so it only exists for extragradient. The base
+            # bias point (grad at theta_t, reusing the main forward) is
+            # algorithm-agnostic and works for single-step algs (oipo1/nmd/...).
+            if self.tteg_bias_point == "extrapolated":
+                assert self.args.estimate_extra_grad, (
+                    "tteg_bias_point=extrapolated requires --alg eg "
+                    "(extragradient look-ahead); use base for single-step algs")
 
     # ------------------------------------------------------------------
     # tracker bookkeeping
@@ -520,9 +527,18 @@ class TTEGTrainer(RiskExtragradientTrainer):
         # TT-EG bias bookkeeping. Set up BEFORE the snapshot/restore so the
         # extrapolated option can evaluate grad(b_hat) while the model still
         # holds the extrapolated iterate theta_tilde.
-        is_correction = self.state.global_step % 2 == 1
+        # Cadence. Extragradient runs extrapolate(even)+update(odd) pairs, so the
+        # bias/tracker fire once per pair on the odd (correction) step, indexed by
+        # global_step // 2. Single-step algs (oipo1/nmd/...) update every step, so
+        # every step is a tracker step, indexed by global_step directly.
+        if self.args.estimate_extra_grad:
+            is_correction = self.state.global_step % 2 == 1
+            update_idx = self.state.global_step // 2
+        else:
+            is_correction = True
+            update_idx = self.state.global_step
         do_bias = (self.use_tteg and is_correction
-                   and (self.state.global_step // 2) % self.tteg_bias_every == 0)
+                   and update_idx % self.tteg_bias_every == 0)
         b_hat = ({n: torch.zeros_like(self.xi[n], device=self.args.device)
                   for n in self._tteg_names} if do_bias else None)
         if do_bias:
@@ -686,9 +702,14 @@ def main():
     args = ap.parse_args()
 
     if args.use_tteg:
-        assert args.alg == "eg", "TT-EG requires --alg eg (extragradient)"
         assert args.lora, "TT-EG requires --lora (tracker is over LoRA params)"
         assert args.ypp_samples >= 2, "TT-EG requires ypp_samples >= 2"
+        # EG supports both bias points; single-step algs (oipo1/nmd/...) only the
+        # base bias point (no extragradient look-ahead iterate to evaluate at).
+        if args.alg != "eg":
+            assert args.tteg_bias_point == "base", (
+                f"TT with --alg {args.alg} requires --tteg_bias_point base "
+                "(extrapolated needs extragradient)")
 
     deepspeed.init_distributed()
     local_rank = args.local_rank
