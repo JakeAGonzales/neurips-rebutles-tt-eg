@@ -183,13 +183,108 @@ def plot_z_ema_worst(records, out_path):
     _save(fig, out_path)
 
 
+OVERLAY_COLORS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]
+
+
+def plot_overlay(runs, key, out_path, title, ylabel=None):
+    """Overlay a single metric (e.g. loss, kl) across multiple runs."""
+    fig, ax = plt.subplots()
+    drew = False
+    for i, (label, recs) in enumerate(runs):
+        xs, ys = _xy(recs, key)
+        if not xs:
+            continue
+        c = OVERLAY_COLORS[i % len(OVERLAY_COLORS)]
+        ax.plot(xs, ys, color=c, alpha=0.25, linewidth=1.0)
+        ax.plot(xs, _ema(ys, alpha=0.1) if len(ys) > 5 else ys, color=c,
+                linewidth=2.0, label=label)
+        drew = True
+    if not drew:
+        plt.close(fig); print(f"  skip overlay {key}: no data"); return
+    ax.set_xlabel("step"); ax.set_ylabel(ylabel or key)
+    ax.set_title(title); ax.legend(loc="best")
+    _save(fig, out_path)
+
+
+def _paired(recs, xkey, ykey):
+    pts = []
+    for r in recs:
+        x, y = r.get(xkey), r.get(ykey)
+        if x is not None and y is not None:
+            pts.append((x, y))
+    pts.sort(key=lambda p: p[0])
+    return [p[0] for p in pts], [p[1] for p in pts]
+
+
+def plot_overlay_vs(runs, xkey, ykey, out_path, title, xlabel, ylabel):
+    """Overlay ykey vs xkey (e.g. loss vs KL) across runs -- removes the
+    per-step-speed / horizon confound by using KL as the progress axis."""
+    fig, ax = plt.subplots()
+    drew = False
+    for i, (label, recs) in enumerate(runs):
+        xs, ys = _paired(recs, xkey, ykey)
+        if not xs:
+            continue
+        c = OVERLAY_COLORS[i % len(OVERLAY_COLORS)]
+        ax.plot(xs, ys, color=c, alpha=0.20, linewidth=1.0)
+        ax.plot(xs, _ema(ys, alpha=0.1) if len(ys) > 5 else ys, color=c,
+                linewidth=2.0, label=label)
+        drew = True
+    if not drew:
+        plt.close(fig); print(f"  skip {ykey} vs {xkey}: no data"); return
+    ax.set_xlabel(xlabel); ax.set_ylabel(ylabel)
+    ax.set_title(title); ax.legend(loc="best")
+    _save(fig, out_path)
+
+
 # ---------- main ----------
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("log", help="Path to .out log file")
+    ap.add_argument("log", nargs="?", help="Path to .out log file (single-log mode)")
+    ap.add_argument("--logs", nargs="+", help="Multiple .out logs (overlay mode)")
+    ap.add_argument("--labels", nargs="+", help="Legend labels for overlay mode")
     ap.add_argument("--outdir", default=None, help="Directory to write plots")
     ap.add_argument("--prefix", default="group_risk", help="Filename prefix")
     args = ap.parse_args()
+
+    # ---- overlay mode: compare loss/KL/etc. across runs ----
+    if args.logs:
+        outdir = args.outdir or "plots"
+        os.makedirs(outdir, exist_ok=True)
+        labels = args.labels or [os.path.basename(p) for p in args.logs]
+        runs = []
+        for p, lab in zip(args.logs, labels):
+            recs = parse_log(os.path.abspath(p))
+            last = recs[-1]["step"] if recs else "?"
+            print(f"{lab}: {len(recs)} entries (last step {last})")
+            runs.append((lab, recs))
+        pf = args.prefix
+        plot_overlay(runs, "loss",              os.path.join(outdir, f"{pf}_loss.png"),
+                     "Training loss vs step", "loss")
+        plot_overlay(runs, "kl",                os.path.join(outdir, f"{pf}_kl.png"),
+                     "KL vs step", "KL")
+        plot_overlay(runs, "grad_norm",         os.path.join(outdir, f"{pf}_grad_norm.png"),
+                     "Gradient norm vs step", "grad_norm")
+        plot_overlay(runs, "rewards/accuracies", os.path.join(outdir, f"{pf}_accuracy.png"),
+                     "Reward accuracy (chosen > rejected) vs step", "accuracy")
+        plot_overlay(runs, "rewards/margins",   os.path.join(outdir, f"{pf}_reward_margin.png"),
+                     "Reward margin vs step", "margin")
+        # ---- vs-KL views (progress axis = KL, removes per-step-speed confound) ----
+        plot_overlay_vs(runs, "kl", "loss", os.path.join(outdir, f"{pf}_loss_vs_kl.png"),
+                        "Loss vs KL", "KL (distance from reference)", "loss")
+        plot_overlay_vs(runs, "kl", "rewards/accuracies",
+                        os.path.join(outdir, f"{pf}_accuracy_vs_kl.png"),
+                        "Reward accuracy vs KL", "KL (distance from reference)", "accuracy")
+        plot_overlay_vs(runs, "kl", "rewards/margins",
+                        os.path.join(outdir, f"{pf}_reward_margin_vs_kl.png"),
+                        "Reward margin vs KL", "KL (distance from reference)", "margin")
+        plot_overlay_vs(runs, "kl", "grad_norm",
+                        os.path.join(outdir, f"{pf}_grad_norm_vs_kl.png"),
+                        "Gradient norm vs KL", "KL (distance from reference)", "grad_norm")
+        return
+
+    if not args.log:
+        ap.error("provide a single log path, or --logs for overlay mode")
 
     log_path = os.path.abspath(args.log)
     outdir = args.outdir or os.path.join(os.path.dirname(log_path), "plots")

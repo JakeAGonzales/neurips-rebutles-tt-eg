@@ -185,10 +185,49 @@ def plot_direct_compare(recs, label, W, out_path):
     ax.legend(loc="best"); _save(fig, out_path)
 
 
-def plot_mc_sanity(runs, out_path):
-    """Empirical MC plug-in risk rho vs its delta-method bias b (payoff space).
-    Sanity: b should be small relative to rho and shrink as training stabilizes;
-    a bias comparable to rho would flag an over-large correction."""
+def plot_estimator_compare(runs, out_path):
+    """Directly answers 'how close is the corrected estimator to the original?'.
+    Overlays the ORIGINAL plug-in risk estimate rho_hat against the DEBIASED
+    estimate (rho_hat - b), where b is the delta-method bias. The curves nearly
+    coincide (gap = b ~ few %), zoomed so the gap is visible; the annotation
+    reports the mean relative gap |b|/|rho|."""
+    fig, ax = plt.subplots(figsize=(8, 5))
+    drew = False
+    rels = []
+    for i, (label, recs) in enumerate(runs):
+        c = COLORS[i % len(COLORS)]
+        xr, yr = _xy(recs, "tteg/rho_plugin")
+        xb, yb = _xy(recs, "tteg/bias_payoff_delta")
+        if not xr or not xb:
+            continue
+        n = min(len(yr), len(yb))
+        x = xr[:n]
+        orig = yr[:n]
+        corr = [orig[k] - yb[k] for k in range(n)]        # debiased = rho_hat - b
+        rels += [abs(yb[k]) / (abs(orig[k]) + 1e-12) for k in range(n)]
+        ax.plot(x, _ema(orig) if n > 5 else orig, color=c, label=f"{label}: original plug-in")
+        ax.plot(x, _ema(corr) if n > 5 else corr, color=c, linestyle="--",
+                alpha=0.85, label=f"{label}: debiased (rho - b)")
+        drew = True
+    if not drew:
+        plt.close(fig); print("  skip estimator_compare: no data"); return
+    mean_rel = sum(rels) / max(len(rels), 1)
+    ax.set_xlabel("step"); ax.set_ylabel(r"risk estimate $\rho$ (payoff space)")
+    ax.set_title("Original plug-in vs debiased estimator (gap = bias b)")
+    ax.annotate(f"mean |b|/|rho| = {mean_rel*100:.1f}%", xy=(0.98, 0.04),
+                xycoords="axes fraction", ha="right", va="bottom",
+                fontsize=10, bbox=dict(boxstyle="round", fc="w", ec="0.7"))
+    ax.legend(loc="best")
+    _save(fig, out_path)
+
+
+def plot_bias_magnitude(runs, out_path):
+    """MAGNITUDE check (NOT a formula validation): the plug-in risk estimate rho
+    vs its OWN delta-method bias b, both in payoff space, and the ratio |b|/|rho|.
+    This shows the finite-sample bias is a small CORRECTION relative to the risk
+    level (|b|/|rho| small is expected/good). It does NOT compare the delta-method
+    against an empirical bias estimate -- for that see the (separate) validation
+    plot where the target ratio is ~1."""
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
     drew = False
     for i, (label, recs) in enumerate(runs):
@@ -205,12 +244,12 @@ def plot_mc_sanity(runs, out_path):
         if xrel:
             ax2.plot(xrel, _ema(yrel) if len(yrel) > 5 else yrel, color=c, label=label)
     if not drew:
-        plt.close(fig); print("  skip mc_sanity: no data"); return
+        plt.close(fig); print("  skip bias_magnitude: no data"); return
     ax1.set_xlabel("step"); ax1.set_ylabel("payoff space")
-    ax1.set_title("Plug-in risk rho vs delta-method bias b")
+    ax1.set_title(r"Plug-in risk estimate $\rho$ vs its own bias $b$")
     ax1.legend(loc="best")
     ax2.set_xlabel("step"); ax2.set_ylabel(r"$|b|/|\rho|$")
-    ax2.set_title("Relative bias (sanity: should be small)")
+    ax2.set_title(r"Bias size relative to risk level (correction is small)")
     ax2.legend(loc="best")
     _save(fig, out_path)
 
@@ -247,7 +286,8 @@ def main():
     plot_overlay(runs, "resid_sq", os.path.join(outdir, f"{p}_residual_sq.png"), logy=True)
     plot_overlay(runs, "frac",     os.path.join(outdir, f"{p}_debias_fraction.png"), hline=1.0)
     plot_overlay(runs, "payoff",   os.path.join(outdir, f"{p}_payoff_bias.png"))
-    plot_mc_sanity(runs, os.path.join(outdir, f"{p}_mc_sanity.png"))
+    plot_bias_magnitude(runs, os.path.join(outdir, f"{p}_bias_magnitude.png"))
+    plot_estimator_compare(runs, os.path.join(outdir, f"{p}_estimator_compare.png"))
 
     # ---- advisor's window-averaged VECTOR diagnostics (need the new run) ----
     windows = _detect_windows(runs)
