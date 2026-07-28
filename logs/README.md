@@ -38,6 +38,7 @@ crashed γ=0.03 extrapolated attempt (kept for completeness; not needed for plot
 | `eg_cvar_a0.25.out`         | EG, CVaR α=0.25, K=8       | 4.29  |
 | `eg_cvar_a0.125.out`        | EG, CVaR α=0.125, K=8      | 12.27 |
 | `omd_oipo1_entropic_c1.out` | OMD (oipo1), entropic c=1, K=8 | 9.98 |
+| `omd_oipo1_entropic_c10.out` | OMD (oipo1), entropic c=10, K=8 | 9.99 |
 
 > Note: there is no EG entropic **c=10** baseline in the paper set — that gap is
 > exactly what `eg_c10_noTT_control.out` fills.
@@ -98,7 +99,7 @@ Uses `--run LABEL:PATH` (repeatable) and `--xclip` to match the paper's
 
 ```bash
 python plot_oipo1_compare.py \
-    --run "OMD entropic c1:logs/baselines/omd_oipo1_entropic_c1.out" \
+    --run "OMD entropic c10:logs/baselines/omd_oipo1_entropic_c10.out" \
     --run "EG entropic c5:logs/baselines/eg_entropic_c5.out" \
     --outdir plots --prefix omd_compare --xclip 4680
 ```
